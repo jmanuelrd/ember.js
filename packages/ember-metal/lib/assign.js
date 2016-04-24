@@ -20,7 +20,13 @@ export default function assign(original, ...args) {
     let arg = args[i];
     if (!arg) { continue; }
 
-    let updates = Object.keys(arg);
+    let updates = [];
+    
+    try{
+      updates = Object.keys(arg);
+    } catch(e){
+      throw new _emberMetalError.default('Tried to retrieve keys of a non-Object');
+    }
 
     for (let i = 0; i < updates.length; i++) {
       let prop = updates[i];
